@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B35D5D65-E28A-4250-95C2-BD5B97912BE6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BCT.BuildScript</RootNamespace>
+    <AssemblyName>BuildScript</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <NoStdLib>false</NoStdLib>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>false</NoStdLib>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="BaseProjects\BaseCliLibrary.cs" />
+    <Compile Include="BaseProjects\BaseCliProject.cs" />
+    <Compile Include="BaseProjects\BaseCppExecutable.cs" />
+    <Compile Include="BaseProjects\BaseCppLibrary.cs" />
+    <Compile Include="BaseProjects\BaseCppProject.cs" />
+    <Compile Include="BaseProjects\BaseCSharpExecutable.cs" />
+    <Compile Include="BaseProjects\BaseCSharpLibrary.cs" />
+    <Compile Include="BaseProjects\BaseSkyforgeProject.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Make.cs" />
+    <Compile Include="Projects\Animation.cs" />
+    <Compile Include="Projects\Application.cs" />
+    <Compile Include="Projects\AsGenClasses.cs" />
+    <Compile Include="Projects\BinaryLayout.cs" />
+    <Compile Include="Projects\Bot.cs" />
+    <Compile Include="Projects\ChangelogEditor.cs" />
+    <Compile Include="Projects\CinematicCore.cs" />
+    <Compile Include="Projects\CinematicEditorDll.cs" />
+    <Compile Include="Projects\CliClassesNativeTests.cs" />
+    <Compile Include="Projects\CliClassesTests.cs" />
+    <Compile Include="Projects\ClientEditorBridge.cs" />
+    <Compile Include="Projects\ClientEditorEngine.cs" />
+    <Compile Include="Projects\ClientEditorManaged.cs" />
+    <Compile Include="Projects\ClientEditorNative.cs" />
+    <Compile Include="Projects\ClientTools.cs" />
+    <Compile Include="Projects\ClientToolsCSharp.cs" />
+    <Compile Include="Projects\ClientZipPacker.cs" />
+    <Compile Include="Projects\CliLibdbTools.cs" />
+    <Compile Include="Projects\CliNDbHelpers.cs" />
+    <Compile Include="Projects\CliTestSupport.cs" />
+    <Compile Include="Projects\ClrGhost.cs" />
+    <Compile Include="Projects\Collision.cs" />
+    <Compile Include="Projects\DataProvider.cs" />
+    <Compile Include="Projects\DBCore.cs" />
+    <Compile Include="Projects\DBGeneratedClientClasses.cs" />
+    <Compile Include="Projects\DBGeneratedForTesting.cs" />
+    <Compile Include="Projects\DBGeneratedServerClasses.cs" />
+    <Compile Include="Projects\DebugGeometry.cs" />
+    <Compile Include="Projects\DebugGUI.cs" />
+    <Compile Include="Projects\DebugInfoCli.cs" />
+    <Compile Include="Projects\DesignersDream.cs" />
+    <Compile Include="Projects\DesignersDreamDatabase.cs" />
+    <Compile Include="Projects\DesignersDreamGlobals.cs" />
+    <Compile Include="Projects\DesignersDreamModel.cs" />
+    <Compile Include="Projects\EditedTerrain.cs" />
+    <Compile Include="Projects\EditorCLI.cs" />
+    <Compile Include="Projects\EditorControls.cs" />
+    <Compile Include="Projects\EditorControlsLite.cs" />
+    <Compile Include="Projects\EditorCore.cs" />
+    <Compile Include="Projects\EditorIndex.cs" />
+    <Compile Include="Projects\EditorLauncher.cs" />
+    <Compile Include="Projects\EditorMainLauncher.cs" />
+    <Compile Include="Projects\EnlightenGIPrecompute.cs" />
+    <Compile Include="Projects\EnlightenGIRuntime.cs" />
+    <Compile Include="Projects\Export.cs" />
+    <Compile Include="Projects\ExportEditor.cs" />
+    <Compile Include="Projects\ExportImageTools.cs" />
+    <Compile Include="Projects\ExternalProcesses.cs" />
+    <Compile Include="Projects\ExternalTools.cs" />
+    <Compile Include="Projects\GameBase.cs" />
+    <Compile Include="Projects\GameController.cs" />
+    <Compile Include="Projects\GameEvents.cs" />
+    <Compile Include="Projects\GameExport.cs" />
+    <Compile Include="Projects\GameMechanics.cs" />
+    <Compile Include="Projects\GameMechanicsExport.cs" />
+    <Compile Include="Projects\GameSound.cs" />
+    <Compile Include="Projects\GameState.cs" />
+    <Compile Include="Projects\GameStateDebug.cs" />
+    <Compile Include="Projects\GameTools.cs" />
+    <Compile Include="Projects\GIBuilder.cs" />
+    <Compile Include="Projects\GICommon.cs" />
+    <Compile Include="Projects\GIPrecompute.cs" />
+    <Compile Include="Projects\Global.cs" />
+    <Compile Include="Projects\GMUIHelper.cs" />
+    <Compile Include="Projects\HLSL.cs" />
+    <Compile Include="Projects\IconCreator.cs" />
+    <Compile Include="Projects\Image.cs" />
+    <Compile Include="Projects\Input.cs" />
+    <Compile Include="Projects\IO.cs" />
+    <Compile Include="Projects\JavaDescriptors.cs" />
+    <Compile Include="Projects\JavaSaver.cs" />
+    <Compile Include="Projects\LatencyMeter.cs" />
+    <Compile Include="Projects\LatencyMeterUI.cs" />
+    <Compile Include="Projects\LibDB.cs" />
+    <Compile Include="Projects\LibDBLoader.cs" />
+    <Compile Include="Projects\Logger.cs" />
+    <Compile Include="Projects\LoggerCli.cs" />
+    <Compile Include="Projects\Main.cs" />
+    <Compile Include="Projects\Map.cs" />
+    <Compile Include="Projects\MapEditorDll.cs" />
+    <Compile Include="Projects\MathLib.cs" />
+    <Compile Include="Projects\MayaRawExport.cs" />
+    <Compile Include="Projects\ModelEditorDll.cs" />
+    <Compile Include="Projects\MorphemeAcXDB.cs" />
+    <Compile Include="Projects\MorphemeAnimation.cs" />
+    <Compile Include="Projects\MorphemeAnimationExport.cs" />
+    <Compile Include="Projects\MorphemeAnimationPlugin.cs" />
+    <Compile Include="Projects\MorphemeAssetCompiler.cs" />
+    <Compile Include="Projects\MorphemeRuntimeTarget.cs" />
+    <Compile Include="Projects\NaviMapExport.cs" />
+    <Compile Include="Projects\NDbTypes.cs" />
+    <Compile Include="Projects\Net.cs" />
+    <Compile Include="Projects\NetProtected.cs" />
+    <Compile Include="Projects\NSTL.cs" />
+    <Compile Include="Projects\ParticleFX.cs" />
+    <Compile Include="Projects\Physics.cs" />
+    <Compile Include="Projects\Platform.cs" />
+    <Compile Include="Projects\RcsCli.cs" />
+    <Compile Include="Projects\RcsCpp.cs" />
+    <Compile Include="Projects\RenderCommon.cs" />
+    <Compile Include="Projects\RenderCommonExport.cs" />
+    <Compile Include="Projects\RenderD3D12.cs" />
+    <Compile Include="Projects\RenderD3D9.cs" />
+    <Compile Include="Projects\RenderGnm.cs" />
+    <Compile Include="Projects\RenderUtils.cs" />
+    <Compile Include="Projects\RenderUtilsD3D9.cs" />
+    <Compile Include="Projects\RenderUtilsD3D12X.cs" />
+    <Compile Include="Projects\RenderUtilsGnm.cs" />
+    <Compile Include="Projects\Replica.cs" />
+    <Compile Include="Projects\Replication.cs" />
+    <Compile Include="Projects\ResourceDB.cs" />
+    <Compile Include="Projects\ResourceDBNative.cs" />
+    <Compile Include="Projects\ResourceDBTools.cs" />
+    <Compile Include="Projects\ResourceDBToolsTests.cs" />
+    <Compile Include="Projects\ResourceDBUtils.cs" />
+    <Compile Include="Projects\ResourceDbWcfClient.cs" />
+    <Compile Include="Projects\ResourceDbWcfService.cs" />
+    <Compile Include="Projects\Root.cs" />
+    <Compile Include="Projects\Sandbox.cs" />
+    <Compile Include="Projects\UnitTests.cs" />
+    <Compile Include="Projects\Scaleform.cs" />
+    <Compile Include="Projects\Scene.cs" />
+    <Compile Include="Projects\Scene3D.cs" />
+    <Compile Include="Projects\SceneExport.cs" />
+    <Compile Include="Projects\SerializationTest.cs" />
+    <Compile Include="Projects\ServerConsole.cs" />
+    <Compile Include="Projects\ShaderBuilder.cs" />
+    <Compile Include="Projects\ShaderExport.cs" />
+    <Compile Include="Projects\Sky.cs" />
+    <Compile Include="Projects\Skyforge.cs" />
+    <Compile Include="Projects\Slon.cs" />
+    <Compile Include="Projects\Sound.cs" />
+    <Compile Include="Projects\SoundExport.cs" />
+    <Compile Include="Projects\SpaceIndex.cs" />
+    <Compile Include="Projects\SrvConnection.cs" />
+    <Compile Include="Projects\Terrain.cs" />
+    <Compile Include="Projects\TestEditors.cs" />
+    <Compile Include="Projects\TestEditorsExternal.cs" />
+    <Compile Include="Projects\TestFramework.cs" />
+    <Compile Include="Projects\Tools.cs" />
+    <Compile Include="Projects\UI.cs" />
+    <Compile Include="Projects\UILocalizationCreator.cs" />
+    <Compile Include="Projects\UITextureCreator.cs" />
+    <Compile Include="Projects\UITools.cs" />
+    <Compile Include="Projects\VisualConstructor.cs" />
+    <Compile Include="Projects\VisualFlowRuntime.cs" />
+    <Compile Include="Projects\VisualObjectRuntime.cs" />
+    <Compile Include="Projects\VisualScripts.cs" />
+    <Compile Include="Projects\VisualScriptsCli.cs" />
+    <Compile Include="Projects\VoiceChat.cs" />
+    <Compile Include="Solutions\F1.cs" />
+    <Compile Include="Solutions\Bots.cs" />
+    <Compile Include="Solutions\GamePacked.cs" />
+    <Compile Include="Solutions\GameUnpacked.cs" />
+    <Compile Include="Solutions\PackingProcess.cs" />
+    <Compile Include="Solutions\RemoteConsole.cs" />
+    <Compile Include="Solutions\Smoke.cs" />
+    <Compile Include="Vendors\AmdDisplayLib.cs" />
+    <Compile Include="Vendors\ATICubeMapGen.cs" />
+    <Compile Include="Vendors\Bullet.cs" />
+    <Compile Include="Vendors\CrnDecomp.cs" />
+    <Compile Include="Vendors\CrnLib.cs" />
+    <Compile Include="Vendors\GameCenter.cs" />
+    <Compile Include="Vendors\LibPng.cs" />
+    <Compile Include="Vendors\LibJpeg.cs" />
+    <Compile Include="Vendors\LibTom.cs" />
+    <Compile Include="Vendors\PugiXML.cs" />
+    <Compile Include="Vendors\Steam.cs" />
+    <Compile Include="Vendors\CrashRpt.cs" />
+    <Compile Include="Vendors\D3D9.cs" />
+    <Compile Include="Vendors\DiaSdk.cs" />
+    <Compile Include="Vendors\EasyHook.cs" />
+    <Compile Include="Vendors\Enlighten.cs" />
+    <Compile Include="Vendors\FCollada.cs" />
+    <Compile Include="Vendors\FBX.cs" />
+    <Compile Include="Vendors\FMod.cs" />
+    <Compile Include="Vendors\IC.cs" />
+    <Compile Include="Vendors\Morpheme.cs" />
+    <Compile Include="Vendors\MsgPackCpp.cs" />
+    <Compile Include="Vendors\MsgPackCli.cs" />
+    <Compile Include="Vendors\NvAPI.cs" />
+    <Compile Include="Vendors\NvPerfKit.cs" />
+    <Compile Include="Vendors\Opcode.cs" />
+    <Compile Include="Vendors\OpenSSL.cs" />
+    <Compile Include="Vendors\PCRE.cs" />
+    <Compile Include="Vendors\Profiler.cs" />
+    <Compile Include="Vendors\Scaleform.cs" />
+    <Compile Include="Vendors\Simul.cs" />
+    <Compile Include="Vendors\Snappy.cs" />
+    <Compile Include="Vendors\Squish.cs" />
+    <Compile Include="Vendors\StarForce.cs" />
+    <Compile Include="Vendors\TaskScheduler.cs" />
+    <Compile Include="Vendors\Umbra.cs" />
+    <Compile Include="Vendors\Vivox.cs" />
+    <Compile Include="Vendors\Zlib.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BuildConfigurationTool.csproj">
+      <Project>{ABCDBAE8-BD6C-40B3-8C5B-3189CDC317A1}</Project>
+      <Name>BuildConfigurationTool</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

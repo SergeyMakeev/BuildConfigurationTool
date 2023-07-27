@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildConfigurationTool", "BuildConfigurationTool.csproj", "{ABCDBAE8-BD6C-40B3-8C5B-3189CDC317A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildScript", "BuildScript\BuildScript.csproj", "{B35D5D65-E28A-4250-95C2-BD5B97912BE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABCDBAE8-BD6C-40B3-8C5B-3189CDC317A1}.Debug|x86.ActiveCfg = Debug|x86
+		{ABCDBAE8-BD6C-40B3-8C5B-3189CDC317A1}.Debug|x86.Build.0 = Debug|x86
+		{ABCDBAE8-BD6C-40B3-8C5B-3189CDC317A1}.Release|x86.ActiveCfg = Release|x86
+		{ABCDBAE8-BD6C-40B3-8C5B-3189CDC317A1}.Release|x86.Build.0 = Release|x86
+		{B35D5D65-E28A-4250-95C2-BD5B97912BE6}.Debug|x86.ActiveCfg = Debug|x86
+		{B35D5D65-E28A-4250-95C2-BD5B97912BE6}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

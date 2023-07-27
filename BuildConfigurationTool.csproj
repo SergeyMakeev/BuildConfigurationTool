@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ABCDBAE8-BD6C-40B3-8C5B-3189CDC317A1}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BCT</RootNamespace>
+    <AssemblyName>BuildConfigurationTool</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyMetadata.cs" />
+    <Compile Include="Source\BuildScriptRunner.cs" />
+    <Compile Include="Source\CommandLineOptions.cs" />
+    <Compile Include="Source\Generators\FastBuild.cs" />
+    <Compile Include="Source\Generators\GeneratorDependencyGraph.cs" />
+    <Compile Include="Source\Generators\IGenerator.cs" />
+    <Compile Include="Source\Generators\GeneratorVisualStudio.cs" />
+    <Compile Include="Source\Generators\VisualStudio\ProjectStructure\ImportGroupElement.cs" />
+    <Compile Include="Source\Generators\VisualStudio\ProjectStructure\ItemGroupElement.cs" />
+    <Compile Include="Source\Generators\VisualStudio\ProjectStructure\ProjectElement.cs" />
+    <Compile Include="Source\Generators\VisualStudio\ProjectStructure\ElementContainer.cs" />
+    <Compile Include="Source\Generators\VisualStudio\ProjectStructure\ItemDefinitionGroupElement.cs" />
+    <Compile Include="Source\Generators\VisualStudio\ProjectStructure\RootElement.cs" />
+    <Compile Include="Source\Generators\VisualStudio\ProjectStructure\PropertyGroupElement.cs" />
+    <Compile Include="Source\Generators\VisualStudio\ProjectStructure\TargetElement.cs" />
+    <Compile Include="Source\Generators\VisualStudio\VSFiltersFile.cs" />
+    <Compile Include="Source\Generators\VisualStudio\VSProjectFile.cs" />
+    <Compile Include="Source\Generators\VisualStudio\VSSolutionFile.cs" />
+    <Compile Include="Source\Generators\VisualStudio\VSFile.cs" />
+    <Compile Include="Source\Model\ConsoleFileMapping.cs" />
+    <Compile Include="Source\Model\Toolset.cs" />
+    <Compile Include="Source\Log.cs" />
+    <Compile Include="Source\Model\CompilationFlags.cs" />
+    <Compile Include="Source\Model\ProjectFile.cs" />
+    <Compile Include="Source\Model\SolutionFile.cs" />
+    <Compile Include="Source\Model\ThirdParty.cs" />
+    <Compile Include="Source\Model\Workspace.cs" />
+    <Compile Include="Source\UnityBuild.cs" />
+    <Compile Include="Source\Utilites.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <UsingTask TaskName="GetCurrentAssemblyFingerprint" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <InputFiles ParameterType="System.String[]" Required="true" />
+      <AssemblyFingerprint ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Linq" />
+      <Using Namespace="System.Security.Cryptography" />
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+        string assemblyInfo = @"Properties\AssemblyInfo.cs";
+        using (var md5 = MD5.Create())
+        {
+            foreach (var path in InputFiles)
+            {
+                if (path == assemblyInfo)
+                    continue;
+                using (var stream = new StreamReader(path))
+                {
+                    string line;
+                    while ((line = stream.ReadLine()) != null)
+                    {
+                        var bytes = new byte[line.Length * sizeof(char)];
+                        Buffer.BlockCopy(line.ToCharArray(), 0, bytes, 0, bytes.Length);
+                        md5.TransformBlock(bytes, 0, bytes.Length, bytes, 0);
+                    }                
+                }
+            }
+            md5.TransformFinalBlock(new byte[0], 0, 0);
+            AssemblyFingerprint = string.Join("", md5.Hash.Select(b => b.ToString("x2")));
+            if (File.Exists(assemblyInfo))
+            {
+                string assemblyInfoContent = File.ReadAllText(assemblyInfo);
+                File.WriteAllText(assemblyInfo, Regex.Replace(assemblyInfoContent, @"AssemblyFingerprint\([^\)]+\)", string.Format("AssemblyFingerprint(\"{0}\")", AssemblyFingerprint)));
+            }
+        }
+      ]]></Code>
+    </Task>
+  </UsingTask>
+  <UsingTask TaskName="GetAssemblyFingerprint" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <BuildConfigurationToolAssembly ParameterType="System.String" Required="true" />
+      <AssemblyFingerprint ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Reflection" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+       if (File.Exists(BuildConfigurationToolAssembly))
+       {
+            var assemblyFullPath = System.IO.Path.GetFullPath(BuildConfigurationToolAssembly);
+            Assembly assembly = Assembly.LoadFile(assemblyFullPath);
+            var assemblyFingerprintAttribute = CustomAttributeData.GetCustomAttributes( assembly ).FirstOrDefault(i => i.ToString().Contains( "BCT.Properties.AssemblyFingerprint" ));
+            if (assemblyFingerprintAttribute != null)
+            {
+                var assemblyFingerprint = assemblyFingerprintAttribute.ConstructorArguments.FirstOrDefault();                
+                AssemblyFingerprint = assemblyFingerprint != null ? (String)assemblyFingerprint.Value : String.Empty;
+            }
+       }
+      ]]></Code>
+    </Task>
+  </UsingTask>
+  <Target Name="BeforeBuild" Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <GetCurrentAssemblyFingerprint InputFiles="@(Compile)">
+      <Output ItemName="FingerprintHash" TaskParameter="AssemblyFingerprint" />
+    </GetCurrentAssemblyFingerprint>
+    <Message Text="Fingerprint: @(FingerprintHash)" Importance="High" />
+  </Target>
+  <!-- Target CheckAssemblyFingerprint only for TeamCity -->
+  <Target Name="CheckAssemblyFingerprint" Condition="'$(TEAMCITY_VERSION)' != ''">
+    <GetCurrentAssemblyFingerprint InputFiles="@(Compile)">
+      <Output ItemName="CurrentAssemblyFingerprint" TaskParameter="AssemblyFingerprint" />
+    </GetCurrentAssemblyFingerprint>
+    <GetAssemblyFingerprint BuildConfigurationToolAssembly="$(OutputPath)\$(AssemblyName).exe">
+      <Output ItemName="TargetAssemblyFingerprint" TaskParameter="AssemblyFingerprint" />
+    </GetAssemblyFingerprint>
+    <Message Text="Target assembly  : @(TargetAssemblyFingerprint)" Importance="High" />
+    <Message Text="Current assembly : @(CurrentAssemblyFingerprint)" Importance="High" />
+    <Message Text="##teamcity[buildStatus text='BuildConfigurationTool is dirty' status='FAILURE']" Condition="'@(CurrentAssemblyFingerprint)' != '@(TargetAssemblyFingerprint)'" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
